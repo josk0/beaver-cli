@@ -1,0 +1,5 @@
+{
+  "thread-run-a.json": "thread {thread_id, run_id} for the first run of chat 10000000-0000-4000-8000-000000000001 (one item citation, no page). Converted from a real answer of /beaver/chat/thread; ids and chat titles replaced.",
+  "thread-full.json": "thread {thread_id} of the same chat after a follow-up run: user, markdown and activity blocks. Converted from a real answer; ids and chat titles replaced.",
+  "thread-attachment-page.json": "thread {thread_id, run_id} whose answer cites a PDF attachment with a printed page label (266). Converted from a real answer; ids and chat titles replaced."
+}

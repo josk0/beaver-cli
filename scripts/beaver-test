@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Development helper: runs the built beaver against a second, test Zotero (one with a build of the
+# fork branch and 'Terminal and script access' on) on port BEAVER_PORT, default 23126, from any
+# directory. Rebuilds dist/ first when it is missing or older than a file under src/.
+# It may be symlinked onto PATH; the repository is found through the link.
+set -euo pipefail
+
+src="${BASH_SOURCE[0]}"
+while [ -L "$src" ]; do
+  dir="$(cd -P "$(dirname "$src")" && pwd)"
+  src="$(readlink "$src")"
+  [[ "$src" != /* ]] && src="$dir/$src"
+done
+repo="$(cd -P "$(dirname "$src")/.." && pwd)"
+port="${BEAVER_PORT:-23126}"
+
+if ! curl -s -m 3 -o /dev/null -X POST "http://127.0.0.1:${port}/connector/ping"; then
+  echo "beaver-test: nothing answers on port ${port}. Start the test Zotero, or set BEAVER_PORT to its port." >&2
+  exit 10
+fi
+
+main="$repo/dist/main.js"
+if [ ! -f "$main" ] || [ -n "$(find "$repo/src" -type f -newer "$main" -print -quit)" ]; then
+  (cd "$repo" && npm run build --silent) >&2
+fi
+
+exec node "$main" --port "$port" "$@"

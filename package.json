@@ -1,0 +1,35 @@
+{
+  "name": "beaver-zotero-cli",
+  "version": "0.0.0",
+  "description": "Terminal client for Beaver, the AI research assistant in Zotero: interactive chat and a one-shot JSON mode for scripts and AI agents",
+  "private": true,
+  "license": "AGPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josk0/beaver-cli.git"
+  },
+  "homepage": "https://github.com/josk0/beaver-cli#readme",
+  "type": "module",
+  "bin": {
+    "beaver": "dist/main.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p . && chmod +x dist/main.js",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.test.json",
+    "test": "vitest run",
+    "test:live": "vitest run --config vitest.live.config.ts",
+    "beaver": "tsx src/main.ts"
+  },
+  "dependencies": {
+    "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^3.0.0"
+  }
+}

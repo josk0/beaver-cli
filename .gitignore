@@ -1,0 +1,7 @@
+node_modules/
+dist/
+
+# Personal notes for coding agents, and agent session state
+CLAUDE.local.md
+.remember/
+design.local.md
